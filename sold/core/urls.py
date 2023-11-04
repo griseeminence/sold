@@ -1,6 +1,9 @@
-def main():
-    pass
+from django.contrib import admin
+from django.urls import path, include
+from .views import index, contact
 
 
-if __name__ == '__main__':
-    main()
+urlpatterns = [
+    path('', index, name='index'),
+    path('contact/', contact, name='contact'),
+]
