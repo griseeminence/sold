@@ -1,0 +1,15 @@
+from django import forms
+
+from .models import CommunicationMessage, Communication
+
+class CommunicationMessageForm(forms.ModelForm):
+    class Meta:
+        model = CommunicationMessage
+        fields = ('content',)
+
+        widgets = {
+            'content': forms.TextInput(attrs={
+                'class': 'w-full py-4 px-6 rounded-xl border'
+            })
+        }
+
