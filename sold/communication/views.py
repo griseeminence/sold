@@ -18,7 +18,7 @@ def new_communication(request, item_pk):
     communications = Communication.objects.filter(item=item).filter(members__in=[request.user.id])
 
     if communications:
-        pass
+        return redirect('communication:detail', pk=communications.first().pk)
 
     if request.method == 'POST':
         form = CommunicationMessageForm(request.POST)
@@ -42,6 +42,7 @@ def new_communication(request, item_pk):
         'form': form
     })
 
+
 @login_required
 def inbox(request):
     communications = Communication.objects.filter(members__in=[request.user.id])
@@ -52,7 +53,22 @@ def inbox(request):
 
 @login_required
 def detail(request, pk):
-    communication = Communication.objects.filter(members__in=[request.user.id].get(pk=pk))
+    communications = Communication.objects.filter(members__in=[request.user.id]).get(pk=pk)
+    if request.method == 'POST':
+        form = CommunicationMessageForm(request.POST)
+
+        if form.is_valid():
+            communication_message = form.save(commit=False)
+            communication_message.communication = communications
+            communication_message.created_by = request.user
+            communication_message.save()
+
+            communications.save()
+
+            return redirect('communication:detail', pk=pk)
+    else:
+        form = CommunicationMessageForm()
     return render(request, 'communication/detail.html', {
-        'communication': communication
+        'communications': communications,
+        'form': form,
     })
