@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     'item',
     'dashboard',
     'communication',
-    'debug_toolbar',
+    # 'debug_toolbar',
     'django_bootstrap5',
 ]
 

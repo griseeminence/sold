@@ -78,3 +78,14 @@ def edit(request, pk):
         'form': form,
         'title': 'Edit item',
     })
+
+
+def category_list(request, category_slug):
+    template = 'Item/category_list.html'
+    item_by_category = Item.objects.filter(category__slug=category_slug)
+    items = Item.objects.filter(is_sold=False)
+    context = {
+        'item_by_category': item_by_category,
+        'items': items,
+    }
+    return render(request, template, context)

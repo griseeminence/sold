@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Категории листинг
+{% endblock %}
+
+
+{% block content %}
+
+  <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+    <div class="col-md-12 px-0">
+
+      {% for category in item_by_category %}
+            <div class="ml-4 mr-4 mb-4">
+                <a href="{% url 'item:detail' item.id %}">
+                    <div>
+                        <img src="{{ item.image.url }}" class="rounded-t-xl" alt="this is alt parametr" >
+                    </div>
+
+                    <div class="p-6 bg-white rounded-b-xl">
+                        <h2 class="text-2-xl">
+                            {{ item.name }}
+                        </h2>
+                        <p class="text-gray-500">
+                            Price: {{ item.price }}
+                        </p>
+                    </div>
+                </a>
+            </div>
+      {% endfor %}
+
+    </div>
+  </div>
+
+{% endblock %}

@@ -4,28 +4,42 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:200,400&display=swap" rel="stylesheet">
+
+
+
     <title>{% block title %}{% endblock %}</title>
 </head>
-<body>
+
+<body class="bg-white text-gray-600 work-sans leading-normal text-base tracking-normal">
+<!-- Nav -->
     <nav class="py-6 px-6 flex justify-between items-center border-b border-gray-200">
-      <a href="/" class="text-xl font-semibold">Sold!</a>
+      <a href="/" class="italic flex items-center tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl ">S O L D</a>
       <div class="space-x-6">
-          <a href="{% url 'item:new_item' %}" class="text-lg font-semibold hover:text-gray-500">New item</a>
-          <a href="{% url 'item:items' %}" class="text-lg font-semibold hover:text-gray-500">Browse</a>
+          <a href="{% url 'item:new_item' %}" class="inline-block no-underline hover:text-black hover:underline py-2 px-4">Add product</a>
+          <a href="{% url 'item:items' %}" class="inline-block no-underline hover:text-black hover:underline py-2 px-4">Searching</a>
           {% if request.user.is_authenticated %}
-              <a href="{% url 'communication:inbox' %}" class="px-6 py-3 text lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Inbox</a>
-              <a href="{% url 'dashboard:index' %}" class="px-6 py-3 text lg font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Dashboard</a>
+              <a href="{% url 'communication:inbox' %}" class="px-6 py-3 text lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Chat</a>
+              <a href="{% url 'dashboard:index' %}" class="px-6 py-3 text lg font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">My products</a>
               <a href="{% url 'logout' %}" class="px-6 py-3 text lg font-semibold bg-yellow-500 text-white rounded-xl hover:bg-yellow-700">Logout</a>
               {% else %}
               <a href="{% url 'core:signup' %}" class="px-6 py-3 text lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Sign Up</a>
-              <a href="{% url 'core:login' %}" class="px-6 py-3 text lg font-semibold bg-green-500 text-white rounded-xl hover:bg-green-700">Log in</a>
+              <a href="{% url 'core:login' %}" class="px-6 py-3 text lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Log in</a>
           {% endif %}
       </div>
     </nav>
+
+<!-- Main picture -->
+{% block mainpic %}
+{% endblock %}
+
+<!-- Main content -->
     <div class="px-6 py-6">
 {% block content %}
 {% endblock %}

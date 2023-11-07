@@ -6,6 +6,7 @@ User = get_user_model()
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
+    slug = models.SlugField('Slug', max_length=64, blank=True, null=True, default=None)
 
     class Meta:
         ordering = ('name',)
