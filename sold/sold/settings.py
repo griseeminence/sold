@@ -6,7 +6,14 @@ SECRET_KEY = 'django-insecure-l#xx)3sm2n4xw3#!fmhfi)zcfu$q!-ch6(1q79b_^@9^15%z2@
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
+
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -18,7 +25,9 @@ INSTALLED_APPS = [
     'core',
     'item',
     'dashboard',
-    'communication'
+    'communication',
+    'debug_toolbar',
+    'django_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -84,6 +93,16 @@ USE_TZ = True
 STATIC_URL = 'static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
+DJANGORESIZED_DEFAULT_SIZE = [600, 600]
+DJANGORESIZED_DEFAULT_SCALE = 1
+DJANGORESIZED_DEFAULT_QUALITY = 86
+DJANGORESIZED_DEFAULT_KEEP_META = True
+DJANGORESIZED_DEFAULT_FORCE_FORMAT = 'JPEG'
+DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'JPEG': ".jpg"}
+DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

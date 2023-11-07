@@ -7,6 +7,7 @@ from item.models import Item
 from .forms import CommunicationMessageForm
 
 
+# Create your views here.
 @login_required
 def new_communication(request, item_pk):
     item = get_object_or_404(Item, pk=item_pk)

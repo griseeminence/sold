@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from item.forms import NewItemForm, EditItemForm
 from item.models import Item, Category
+from PIL import Image
 
 
 def items(request):
@@ -15,7 +16,8 @@ def items(request):
         items = items.filter(category_id=category_id)
 
     if query:
-        items = items.filter(Q(name__icontains=query) | Q(description__icontains=query))  # Выполняет поиск по имени
+        items = items.filter(Q(name__icontains=query) | Q(description__icontains=query)) # Выполняет поиск по имени
+
 
     context = {
         'items': items,
@@ -25,7 +27,6 @@ def items(request):
     }
     return render(request, 'item/items.html', context)
 
-
 def detail(request, pk):
     item = get_object_or_404(Item, pk=pk)
     related_items = Item.objects.filter(category=item.category, is_sold=False).exclude(pk=pk)[0:3]
@@ -34,7 +35,6 @@ def detail(request, pk):
         'related_items': related_items
     }
     return render(request, 'item/detail.html', context)
-
 
 @login_required
 def new_item(request):
@@ -50,6 +50,7 @@ def new_item(request):
     context = {'form': form,
                'title': 'New Item'}
     return render(request, 'item/new_item.html', context)
+
 
 
 @login_required

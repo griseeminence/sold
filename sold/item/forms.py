@@ -1,9 +1,9 @@
+
 from django import forms
 
 from .models import Item
 
 INPUT_FORMATS = 'w-full py-4 px-6 rounded-xl border'
-
 
 class NewItemForm(forms.ModelForm):
     class Meta:
@@ -26,7 +26,6 @@ class NewItemForm(forms.ModelForm):
                 'class': INPUT_FORMATS
             })
         }
-
 
 class EditItemForm(forms.ModelForm):
     class Meta:
