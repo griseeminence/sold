@@ -16,8 +16,17 @@ def index(request):
 
 
 def contact(request):
-    return render(request, 'core/contact.html')
+    return render(request, 'static/contact.html')
 
+
+def about(request):
+    template = 'static/about.html'
+    return render(request, template)
+
+
+def terms(request):
+    template = 'static/terms.html'
+    return render(request, template)
 
 def signup(request):
     if request.method == 'POST':

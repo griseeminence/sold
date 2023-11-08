@@ -3,11 +3,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from .models import Communication
 from item.models import Item
-
 from .forms import CommunicationMessageForm
 
 
-# Create your views here.
 @login_required
 def new_communication(request, item_pk):
     item = get_object_or_404(Item, pk=item_pk)
@@ -38,9 +36,10 @@ def new_communication(request, item_pk):
     else:
         form = CommunicationMessageForm()
 
-    return render(request, 'communication/new_communication.html', {
-        'form': form
-    })
+    context = {
+        'form': form,
+    }
+    return render(request, 'communication/new_communication.html', context)
 
 
 @login_required
