@@ -2,12 +2,13 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 
 from .models import Communication
-from item.models import Item
 from .forms import CommunicationMessageForm
+from item.models import Item
 
 
 @login_required
 def new_communication(request, item_pk):
+    template = 'communication/new_communication.html'
     item = get_object_or_404(Item, pk=item_pk)
 
     if item.created_by == request.user:
@@ -39,19 +40,23 @@ def new_communication(request, item_pk):
     context = {
         'form': form,
     }
-    return render(request, 'communication/new_communication.html', context)
+
+    return render(request, template, context)
 
 
 @login_required
 def inbox(request):
     communications = Communication.objects.filter(members__in=[request.user.id])
-    return render(request, 'communication/inbox.html', {
+    template = 'communication/inbox.html'
+    context = {
         'communications': communications
-    })
+    }
+    return render(request, template, context)
 
 
 @login_required
 def detail(request, pk):
+    template = 'communication/detail.html'
     communications = Communication.objects.filter(members__in=[request.user.id]).get(pk=pk)
     if request.method == 'POST':
         form = CommunicationMessageForm(request.POST)
@@ -67,7 +72,9 @@ def detail(request, pk):
             return redirect('communication:detail', pk=pk)
     else:
         form = CommunicationMessageForm()
-    return render(request, 'communication/detail.html', {
+
+    context = {
         'communications': communications,
         'form': form,
-    })
+    }
+    return render(request, template, context)
