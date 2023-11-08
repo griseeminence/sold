@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, redirect
 
 from .forms import SignupForm
@@ -5,7 +6,18 @@ from item.models import Category, Item
 
 
 def index(request):
-    items = Item.objects.filter(is_sold=False)[0:6]
+    items = Item.objects.filter(is_sold=False)
+
+    paginator = Paginator(items, 3)
+
+    page = request.GET.get('page')
+    try:
+        items = paginator.page(page)
+    except PageNotAnInteger:
+        items = paginator.page(1)
+    except EmptyPage:
+        items = paginator.page(paginator.num_pages)
+
     template = 'core/index.html'
     categories = Category.objects.all()
     context = {

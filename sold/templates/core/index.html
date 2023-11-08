@@ -37,15 +37,41 @@
                 </a>
             </div>
           {% endfor %}
-
-
-
       </div>
+
+
+
+    <div class="pagination mt-6" style="display: flex; justify-content: center;">
+    <span class="step-links">
+        {% if items.has_previous %}
+            <a class="pagination-link px-6 py-3 text lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700" href="?page=1">&laquo; Первая</a>
+            <a class="pagination-link px-6 py-3 text lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700" href="?page={{ items.previous_page_number }}">Предыдущая</a>
+        {% endif %}
+
+        <span class="px-6 current-page">
+            Страница {{ items.number }} из {{ items.paginator.num_pages }}.
+        </span>
+
+        {% if items.has_next %}
+            <a class="pagination-link px-6 py-3 text lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700" href="?page={{ items.next_page_number }}">Следующая</a>
+            <a class="pagination-link px-6 py-3 text lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700" href="?page={{ items.paginator.num_pages }}">Последняя &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+
+
     </div>
+
+
+
+
+
 
     <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
         <h2 class="mb-12 text-2xl text-center">Categories</h2>
       <div  class="grid grid-cols-3 grap-3">
+
         {% for category in categories %}
         <div>
             <a href="{% url 'item:category_list' category.slug %}">
