@@ -3,7 +3,7 @@
 {% block title %} Communication {% endblock %}
 {% block content %}
 
-    <h1 class="mb-6 text-3xl">Communication</h1>
+    <h1 class="mb-6 text-3xl">Chat with {{ request.user }}</h1>
 
     <div class="space-y-6">
     {% for message in communications.messages.all %}
@@ -23,6 +23,6 @@
 <form method="post" action="." class="mt-6">
     {% csrf_token %}
     {{ form.as_p }}
-<button type="submit" class="py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white">Send</button>
+<button type="submit" class="py-4 px-8 mt-6 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white">Send</button>
 </form>
 {% endblock %}

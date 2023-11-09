@@ -6,7 +6,7 @@ from item.models import Category, Item
 
 
 def index(request):
-    items = Item.objects.filter(is_sold=False)
+    items = Item.objects.filter(is_sold=False).order_by('?')
 
     paginator = Paginator(items, 3)
 
@@ -27,21 +27,19 @@ def index(request):
     return render(request, template, context)
 
 
-def signup(request):
-    template = 'core/signup.html'
-    if request.method == 'POST':
-        form = SignupForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('/login/')
-    else:
-        form = SignupForm()
-
-    context = {
-        'form': form
-    }
-
-    return render(request, template, context)
+# def signup(request):
+#     template = 'core/signup.html'
+#     if request.method == 'POST':
+#         form = SignupForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('/login/')
+#     else:
+#         form = SignupForm()
+#     context = {
+#         'form': form
+#     }
+#     return render(request, template, context)
 
 
 def contact(request):

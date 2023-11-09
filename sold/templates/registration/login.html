@@ -1,45 +1,39 @@
-<!-- templates/registration/login.html -->
-{% extends "base.html" %}
-<!-- Загружаем библиотеку для работы со стилями Bootstrap. -->
-{% load django_bootstrap5 %}
+{% extends 'base.html' %}
+
+{% block title %}
+SignUp
+{% endblock %}
 
 {% block content %}
-  <!-- Если в запросе передан GET-параметр с указанием страницы,
-    куда надо перейти после входа. -->
-  {% if next %}
-    <!-- Если пользователь уже залогинен, но не обладает нужными правами. -->
-    {% if user.is_authenticated %}
-      <p>
-        У вашего аккаунта нет доступа к этой странице.
-        Чтобы продолжить, войдите в систему с аккаунтом,
-        у которого есть доступ.
-      </p>
-    {% else %}
-      <p>
-        Пожалуйста, войдите в систему,
-        чтобы просматривать эту страницу.
-      </p>
-    {% endif %}
-  {% endif %}
+    <div class="w-1/2 my-6 mx-auto p-6 bg-gray-100 rounded-xl">
+      <h1 class="mb-6 text-3xl">Log in</h1>
 
-  <div class="card col-4 m-3">
-    <div class="card-header">
-      Войти в систему
-    </div>
-    <div class="card-body">
-      <!-- В атрибуте action указываем адрес, куда должен отправляться запрос. -->
-      <form method="post" action="{% url 'login' %}">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        <!-- В скрытом поле передаём параметр next,
-          это URL для переадресации после логина. -->
-        <input type="hidden" name="next" value="{{ next }}">
-        {% bootstrap_button button_type="submit" content="Войти" %}
+      <form method="post" action=".">
+          {% csrf_token %}
+          {{ form.non_field_errors }}
+            <div class="mb-3">
+                <label class="inline-block mb-2">Username</label><br>
+                <input type="text" name="{{ form.username.name }}" class="w-full py-4 px-6 rounded-xl">
+            </div>
+
+            <div class="mb-3">
+                <label class="inline-block mb-2">Password</label><br>
+                <input type="password" name="{{ form.password.name }}" class="w-full py-4 px-6 rounded-xl">
+            </div><br>
+
+            {% if form.errors or form.non_field_errors %}
+                <div class="mb-3 p-6 bg-red-100 rounded-xl">
+                    {% for field in form %}
+                        {{ field.errors }}
+                    {% endfor %}
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+          <button class="py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white">Submit</button>
       </form>
       <div>
-        <!-- Ссылка для перехода на страницу восстановления пароля. -->
         <a href="{% url 'password_reset' %}">Забыли пароль?</a>
       </div>
     </div>
-  </div>
 {% endblock %}
