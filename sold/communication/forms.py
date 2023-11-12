@@ -2,6 +2,7 @@ from django import forms
 
 from .models import CommunicationMessage, Communication
 
+
 class CommunicationMessageForm(forms.ModelForm):
     class Meta:
         model = CommunicationMessage
@@ -12,4 +13,3 @@ class CommunicationMessageForm(forms.ModelForm):
                 'class': 'w-full py-4 px-6 rounded-xl border'
             })
         }
-

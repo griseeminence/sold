@@ -4,6 +4,7 @@ from django_resized import ResizedImageField
 
 User = get_user_model()
 
+
 class Category(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField('Slug', max_length=64, blank=True, null=True, default=None)
@@ -22,7 +23,8 @@ class Item(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     price = models.FloatField()
-    image = ResizedImageField('Картинка', upload_to='images', size=[600, 600], crop=['middle', 'center'], blank=True, null=True)
+    image = ResizedImageField('Картинка', upload_to='images', size=[600, 600], crop=['middle', 'center'], blank=True,
+                              null=True)
     is_sold = models.BooleanField(default=False)
     created_by = models.ForeignKey(User, related_name='items', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)

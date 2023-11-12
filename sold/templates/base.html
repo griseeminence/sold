@@ -13,43 +13,51 @@
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:200,400&display=swap" rel="stylesheet">
 
 
-
     <title>{% block title %}{% endblock %}</title>
 </head>
 
 <body class="bg-white text-gray-600 work-sans leading-normal text-base tracking-normal">
 <!-- Nav -->
-    <nav class="py-6 px-6 flex justify-between items-center border-b border-gray-200">
-      <a href="/" class="italic flex items-center tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl ">S O L D</a>
-      <div class="space-x-6">
-          <a href="{% url 'item:new_item' %}" class="inline-block no-underline hover:text-black hover:underline py-2 px-4">Add product</a>
-          <a href="{% url 'item:items' %}" class="inline-block no-underline hover:text-black hover:underline py-2 px-4">Searching</a>
-          {% if request.user.is_authenticated %}
-              <a href="{% url 'communication:inbox' %}" class="px-6 py-3 text lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Chat</a>
-              <a href="{% url 'dashboard:index' %}" class="px-6 py-3 text lg font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">My products</a>
-              <a href="{% url 'logout' %}" class="px-6 py-3 text lg font-semibold bg-yellow-500 text-white rounded-xl hover:bg-yellow-700">Logout</a>
-              {% else %}
-              <a href="{% url 'registration' %}" class="px-6 py-3 text lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Sign Up</a>
-              <a href="{% url 'login' %}" class="px-6 py-3 text lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Log in</a>
-          {% endif %}
-      </div>
-    </nav>
+<nav class="py-6 px-6 flex justify-between items-center border-b border-gray-200">
+    <a href="/"
+       class="italic flex items-center tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl ">S
+        O L D</a>
+    <div class="space-x-6">
+        <a href="{% url 'item:new_item' %}"
+           class="inline-block no-underline hover:text-black hover:underline py-2 px-4">Add product</a>
+        <a href="{% url 'item:items' %}" class="inline-block no-underline hover:text-black hover:underline py-2 px-4">Searching</a>
+        {% if request.user.is_authenticated %}
+            <a href="{% url 'communication:inbox' %}"
+               class="px-6 py-3 text lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Chat</a>
+            <a href="{% url 'dashboard:index' %}"
+               class="px-6 py-3 text lg font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">My
+                products</a>
+            <a href="{% url 'logout' %}"
+               class="px-6 py-3 text lg font-semibold bg-yellow-500 text-white rounded-xl hover:bg-yellow-700">Logout</a>
+        {% else %}
+            <a href="{% url 'registration' %}"
+               class="px-6 py-3 text lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Sign Up</a>
+            <a href="{% url 'login' %}"
+               class="px-6 py-3 text lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Log in</a>
+        {% endif %}
+    </div>
+</nav>
 
 <!-- Main picture -->
 {% block mainpic %}
 {% endblock %}
 
 <!-- Main content -->
-    <div class="px-6 py-6">
-{% block content %}
-{% endblock %}
-    </div>
+<div class="px-6 py-6">
+    {% block content %}
+    {% endblock %}
+</div>
 
 <footer class="py-6 px-6 flex justify-between bg-gray-800">
     <div class="w-2/3 pr-10">
         <h3 class="mb-5 font-semibold text-gray-500">About</h3>
         <p class="text-lg text-gray-500">Here you can find customers on your goods if you are a seller. <br>
-        Or if you are a buyer - you can find any goods with good price.
+            Or if you are a buyer - you can find any goods with good price.
         </p>
     </div>
 
@@ -58,7 +66,8 @@
         <ul class="space-y-2">
             <li><a href="{% url 'core:about' %}" class="text-lg text-teal-500 hover:text-teal-700">About</a></li>
             <li><a href="{% url 'core:contact' %}" class="text-lg text-teal-500 hover:text-teal-700">Contact</a></li>
-            <li><a href="{% url 'core:terms' %}" class="text-lg text-teal-500 hover:text-teal-700">Terms and conditions</a></li>
+            <li><a href="{% url 'core:terms' %}" class="text-lg text-teal-500 hover:text-teal-700">Terms and
+                conditions</a></li>
         </ul>
     </div>
 </footer>
