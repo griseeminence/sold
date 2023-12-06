@@ -1,4 +1,4 @@
-from django.urls import reverse_lazy, path
+from django.urls import path
 from .views import new_communication, inbox, detail
 
 app_name = 'communication'
